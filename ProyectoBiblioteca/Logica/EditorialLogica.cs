@@ -1,6 +1,7 @@
 ﻿using ProyectoBiblioteca.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Registrar(Editorial oEditorial)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -61,7 +62,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Modificar(Editorial oEditorial)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -95,7 +96,7 @@ namespace ProyectoBiblioteca.Logica
         public List<Editorial> Listar()
         {
             List<Editorial> Lista = new List<Editorial>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -128,7 +129,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Eliminar(int id)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {

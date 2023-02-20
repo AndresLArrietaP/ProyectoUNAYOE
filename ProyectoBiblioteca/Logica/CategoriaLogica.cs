@@ -1,6 +1,7 @@
 ﻿using ProyectoBiblioteca.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Registrar(Categoria oCategoria)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -57,7 +58,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Modificar(Categoria oCategoria)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -91,7 +92,7 @@ namespace ProyectoBiblioteca.Logica
         public List<Categoria> Listar()
         {
             List<Categoria> Lista = new List<Categoria>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -121,7 +122,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Eliminar(int id)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {

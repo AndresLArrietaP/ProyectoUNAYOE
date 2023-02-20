@@ -1,6 +1,7 @@
 ﻿using ProyectoBiblioteca.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
@@ -37,7 +38,7 @@ namespace ProyectoBiblioteca.Logica
         {
 
             List<Libro> rptListaLibro = new List<Libro>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("select l.IdLibro,l.Titulo,l.RutaPortada,l.NombrePortada,");
@@ -93,7 +94,7 @@ namespace ProyectoBiblioteca.Logica
         public int Registrar(Libro objeto)
         {
             int respuesta = 0;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -128,7 +129,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Modificar(Libro objeto)
         {
             bool respuesta = false;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -162,7 +163,7 @@ namespace ProyectoBiblioteca.Logica
         public bool ActualizarRutaImagen(Libro objeto)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -185,7 +186,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Eliminar(int id)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {

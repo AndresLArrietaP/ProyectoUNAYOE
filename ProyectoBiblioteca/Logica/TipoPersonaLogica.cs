@@ -1,6 +1,7 @@
 ﻿using ProyectoBiblioteca.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -33,11 +34,11 @@ namespace ProyectoBiblioteca.Logica
         public List<TipoPersona> Listar()
         {
             List<TipoPersona> Lista = new List<TipoPersona>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("select IdTipoPersona,Descripcion from TIPO_PERSONA", oConexion);
+                    SqlCommand cmd = new SqlCommand("select IdTipoPersona,Descripcion from TipoUsuario", oConexion);
                     cmd.CommandType = CommandType.Text;
 
                     oConexion.Open();

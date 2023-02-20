@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AccesoDatos</RootNamespace>
     <AssemblyName>AccesoDatos</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,14 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Logica\AutorLogica.cs" />
-    <Compile Include="Logica\CategoriaLogica.cs" />
-    <Compile Include="Logica\EditorialLogica.cs" />
-    <Compile Include="Logica\LibroLogica.cs" />
-    <Compile Include="Logica\PersonaLogica.cs" />
-    <Compile Include="Logica\PrestamoLogica.cs" />
-    <Compile Include="Logica\TipoPersonaLogica.cs" />
-    <Compile Include="Logica\Utilidades.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

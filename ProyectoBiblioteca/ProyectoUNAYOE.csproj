@@ -129,9 +129,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Conexion.cs" />
     <Compile Include="Logica\AutorLogica.cs" />
     <Compile Include="Logica\CategoriaLogica.cs" />
-    <Compile Include="Conexion.cs" />
     <Compile Include="Logica\EditorialLogica.cs" />
     <Compile Include="Logica\LibroLogica.cs" />
     <Compile Include="Logica\PersonaLogica.cs" />

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using ProyectoBiblioteca.Logica;
 using ProyectoBiblioteca.Models;
+using ProyectoUNAYOE.Logica;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ProyectoBiblioteca.Controllers
+namespace ProyectoUNAYOE.Controllers
 {
     public class BibliotecaController : Controller
     {

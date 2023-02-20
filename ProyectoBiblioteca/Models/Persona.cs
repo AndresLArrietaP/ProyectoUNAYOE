@@ -13,12 +13,12 @@ namespace ProyectoBiblioteca.Models
         public string Correo { get; set; }
         public string Clave { get; set; }
         public string Codigo { get; set; }
+        public TipoPersona oTipoPersona { get; set; }
+        public bool Estado { get; set; }
         public string HoraI { get; set; }
         public string HoraS { get; set; }
         public string Dias { get; set; }
         public string Especialidad { get; set; }
-        public TipoPersona oTipoPersona { get; set; }
-        public bool Estado { get; set; }
-        public DateTime FechaCreacion { get; set; }
+
     }
 }

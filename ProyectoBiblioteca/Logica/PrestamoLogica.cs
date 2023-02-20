@@ -1,6 +1,7 @@
 ﻿using ProyectoBiblioteca.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -35,7 +36,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Registrar(Prestamo objeto)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -66,7 +67,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Existe(Prestamo objeto)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -90,7 +91,7 @@ namespace ProyectoBiblioteca.Logica
         public List<EstadoPrestamo> ListarEstados()
         {
             List<EstadoPrestamo> Lista = new List<EstadoPrestamo>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -123,7 +124,7 @@ namespace ProyectoBiblioteca.Logica
         public List<Prestamo> Listar(int idestadoprestamo, int idpersona)
         {
             List<Prestamo> Lista = new List<Prestamo>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
@@ -173,7 +174,7 @@ namespace ProyectoBiblioteca.Logica
         public bool Devolver(string estadorecibido, int idprestamo)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {

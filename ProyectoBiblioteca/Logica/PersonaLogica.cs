@@ -1,13 +1,14 @@
 ﻿using ProyectoBiblioteca.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace ProyectoBiblioteca.Logica
+namespace ProyectoUNAYOE.Logica
 {
     public class PersonaLogica
     {
@@ -36,16 +37,20 @@ namespace ProyectoBiblioteca.Logica
         public bool Registrar(Persona objeto)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("sp_RegistrarPersona", oConexion);
+                    SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", oConexion);
                     cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
                     cmd.Parameters.AddWithValue("Apellido", objeto.Apellido);
                     cmd.Parameters.AddWithValue("Correo", objeto.Correo);
                     cmd.Parameters.AddWithValue("Clave", objeto.Clave);
                     cmd.Parameters.AddWithValue("IdTipoPersona", objeto.oTipoPersona.IdTipoPersona);
+                    cmd.Parameters.AddWithValue("HoraI", objeto.HoraI);
+                    cmd.Parameters.AddWithValue("HoraS", objeto.HoraS);
+                    cmd.Parameters.AddWithValue("Dias", objeto.Dias);
+                    cmd.Parameters.AddWithValue("Especialidad", objeto.Especialidad);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -67,11 +72,11 @@ namespace ProyectoBiblioteca.Logica
         public bool Modificar(Persona objeto)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("sp_ModificarPersona", oConexion);
+                    SqlCommand cmd = new SqlCommand("sp_ModificarUsuario", oConexion);
                     cmd.Parameters.AddWithValue("IdPersona", objeto.IdPersona);
                     cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
                     cmd.Parameters.AddWithValue("Apellido", objeto.Apellido);
@@ -79,6 +84,10 @@ namespace ProyectoBiblioteca.Logica
                     cmd.Parameters.AddWithValue("Clave", objeto.Clave);
                     cmd.Parameters.AddWithValue("IdTipoPersona", objeto.oTipoPersona.IdTipoPersona);
                     cmd.Parameters.AddWithValue("Estado", objeto.Estado);
+                    cmd.Parameters.AddWithValue("HoraI", objeto.HoraI);
+                    cmd.Parameters.AddWithValue("HoraS", objeto.HoraS);
+                    cmd.Parameters.AddWithValue("Dias", objeto.Dias);
+                    cmd.Parameters.AddWithValue("Especialidad", objeto.Especialidad);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
 
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -105,13 +114,13 @@ namespace ProyectoBiblioteca.Logica
         public List<Persona> Listar()
         {
             List<Persona> Lista = new List<Persona>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("select p.IdPersona,p.Nombre,p.Apellido,p.Correo,p.Clave,p.Codigo,tp.IdTipoPersona,tp.Descripcion, p.Estado from persona p");
-                    sb.AppendLine("inner join TIPO_PERSONA tp on tp.IdTipoPersona = p.IdTipoPersona");
+                    sb.AppendLine("select u.IdPersona,u.Nombre,u.Apellido,u.Correo,u.Clave,u.Codigo,tu.IdTipoPersona,tu.Descripcion, u.Estado from Usuario u");
+                    sb.AppendLine("inner join TipoUsuario tu on tu.IdTipoPersona = u.IdTipoPersona");
 
                     SqlCommand cmd = new SqlCommand(sb.ToString(), oConexion);
                     cmd.CommandType = CommandType.Text;
@@ -130,6 +139,10 @@ namespace ProyectoBiblioteca.Logica
                                 Clave = dr["Clave"].ToString(),
                                 Codigo = dr["Codigo"].ToString(),
                                 oTipoPersona = new TipoPersona() { IdTipoPersona = Convert.ToInt32(dr["IdTipoPersona"]), Descripcion = dr["Descripcion"].ToString() },
+                                HoraI = dr["HoraI"].ToString(),
+                                HoraS = dr["Horas"].ToString(),
+                                Dias = dr["Dias"].ToString(),
+                                Especialidad = dr["Especialidad"].ToString(),
                                 Estado = Convert.ToBoolean(dr["Estado"])
                             });
                         }
@@ -144,14 +157,15 @@ namespace ProyectoBiblioteca.Logica
             return Lista;
         }
 
+
         public bool Eliminar(int id)
         {
             bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            using (SqlConnection oConexion = new SqlConnection(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["cnnSql"]].ConnectionString))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("delete from persona where IdPersona = @id", oConexion);
+                    SqlCommand cmd = new SqlCommand("delete from Usuario where IdPersona = @id", oConexion);
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.CommandType = CommandType.Text;
 
